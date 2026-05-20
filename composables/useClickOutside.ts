@@ -4,7 +4,9 @@ export const useClickOutside = (target: Ref<HTMLElement | null>, handler: (e: Mo
   const onDown = (e: MouseEvent) => {
     const el = target.value
     if (!el) return
-    if (e.target instanceof Node && el.contains(e.target)) return
+    if (!(e.target instanceof Element)) return
+    if (el.contains(e.target)) return
+    if (e.target.closest('[data-popover]')) return
     handler(e)
   }
 
