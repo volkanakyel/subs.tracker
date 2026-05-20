@@ -26,13 +26,40 @@
           <Search class="h-3.5 w-3.5 text-gray-500" :stroke-width="2" />
         </button>
 
-        <button class="relative h-8 w-8 flex items-center justify-center rounded-md bg-white border border-gray-100 hover:border-gray-200 transition-colors">
-          <Bell class="h-3.5 w-3.5 text-gray-500" :stroke-width="2" />
-          <span class="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-gray-900 ring-2 ring-white" />
-        </button>
+        <!-- Notifications -->
+        <div ref="notifRef" class="relative">
+          <button
+            class="relative h-8 w-8 flex items-center justify-center rounded-md bg-white border border-gray-100 hover:border-gray-200 transition-colors data-[open=true]:border-gray-300"
+            :data-open="openPanel === 'notifications'"
+            aria-label="Notifications"
+            @click.stop="toggle('notifications')"
+          >
+            <Bell class="h-3.5 w-3.5 text-gray-600" :stroke-width="2" />
+            <span
+              v-if="unreadCount"
+              class="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-gray-900 ring-2 ring-white"
+            />
+          </button>
 
-        <div class="h-8 w-8 rounded-full bg-gray-900 flex items-center justify-center text-white text-[10px] font-semibold tracking-wide">
-          {{ user.initials }}
+          <Popover :open="openPanel === 'notifications'" :width="360">
+            <NotificationCenter />
+          </Popover>
+        </div>
+
+        <!-- User -->
+        <div ref="userRef" class="relative">
+          <button
+            class="h-8 w-8 rounded-full bg-gray-900 flex items-center justify-center text-white text-[10px] font-semibold tracking-wide ring-offset-2 transition-all data-[open=true]:ring-2 data-[open=true]:ring-gray-200"
+            :data-open="openPanel === 'user'"
+            aria-label="Account menu"
+            @click.stop="toggle('user')"
+          >
+            {{ user.initials }}
+          </button>
+
+          <Popover :open="openPanel === 'user'" :width="240">
+            <UserMenu @select="onMenuSelect" />
+          </Popover>
         </div>
       </div>
     </div>
@@ -40,11 +67,37 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
 import { Bell, Search } from 'lucide-vue-next'
 
 defineProps<{ title?: string; subtitle?: string }>()
 
 const { user } = useDashboardData()
+const { unreadCount } = useNotifications()
+
+const openPanel = ref<'notifications' | 'user' | null>(null)
+const notifRef = ref<HTMLElement | null>(null)
+const userRef = ref<HTMLElement | null>(null)
+
+const toggle = (panel: 'notifications' | 'user') => {
+  openPanel.value = openPanel.value === panel ? null : panel
+}
+
+useClickOutside(notifRef, (e) => {
+  if (openPanel.value !== 'notifications') return
+  if (userRef.value && e.target instanceof Node && userRef.value.contains(e.target)) return
+  openPanel.value = null
+})
+useClickOutside(userRef, (e) => {
+  if (openPanel.value !== 'user') return
+  if (notifRef.value && e.target instanceof Node && notifRef.value.contains(e.target)) return
+  openPanel.value = null
+})
+
+const onMenuSelect = (_label: string) => {
+  openPanel.value = null
+}
+
 const defaultTitle = 'Good morning, Sibel'
 const formattedDate = new Date().toLocaleDateString('en-US', {
   weekday: 'short',

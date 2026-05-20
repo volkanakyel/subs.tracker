@@ -1,7 +1,9 @@
 <template>
   <BaseCard title="Recent Transactions">
     <template #header>
-      <button class="text-[11px] text-gray-400 font-medium hover:text-gray-800 transition-colors">See all</button>
+      <NuxtLink to="/transactions" class="text-[11px] text-gray-400 font-medium hover:text-gray-800 transition-colors">
+        See all
+      </NuxtLink>
     </template>
 
     <div class="overflow-x-auto flex-1 -mx-1">
@@ -16,18 +18,18 @@
         </thead>
         <tbody>
           <tr
-            v-for="tx in transactions"
-            :key="tx.name"
+            v-for="tx in recent"
+            :key="tx.id"
             class="border-b border-gray-50 last:border-0"
           >
             <td class="py-3 px-1">
               <div class="flex items-center gap-3">
                 <div class="h-7 w-7 rounded-md bg-gray-50 flex items-center justify-center">
-                  <component :is="tx.icon" class="h-3.5 w-3.5 text-gray-600" :stroke-width="1.75" />
+                  <component :is="txIcon(tx.iconKey)" class="h-3.5 w-3.5 text-gray-600" :stroke-width="1.75" />
                 </div>
                 <div>
                   <p class="text-[13px] text-gray-800 font-medium leading-tight">{{ tx.name }}</p>
-                  <p class="text-[10px] text-gray-400 mt-0.5">{{ tx.description }}</p>
+                  <p v-if="tx.description" class="text-[10px] text-gray-400 mt-0.5">{{ tx.description }}</p>
                 </div>
               </div>
             </td>
@@ -36,7 +38,7 @@
                 {{ tx.category }}
               </span>
             </td>
-            <td class="py-3 px-1 text-[12px] text-gray-500 tabular-nums">{{ tx.date }}</td>
+            <td class="py-3 px-1 text-[12px] text-gray-500 tabular-nums">{{ dateLabel(tx.date) }}</td>
             <td class="py-3 px-1 text-right">
               <span
                 class="text-[13px] font-medium tabular-nums"
@@ -53,5 +55,20 @@
 </template>
 
 <script lang="ts" setup>
-const { transactions } = useDashboardData()
+import { computed } from 'vue'
+import { txIcon } from '~/composables/useTransactions'
+
+const { transactions } = useTransactions()
+
+const recent = computed(() =>
+  transactions.value
+    .slice()
+    .sort((a, b) => (a.date < b.date ? 1 : -1))
+    .slice(0, 8)
+)
+
+const dateLabel = (iso: string) => {
+  const [y, m, d] = iso.split('-').map(Number)
+  return new Date(y, m - 1, d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+}
 </script>

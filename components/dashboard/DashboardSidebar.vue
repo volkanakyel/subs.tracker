@@ -10,18 +10,51 @@
       <SidebarSection label="Tracking" :items="navigation.tracking" class="mt-6" />
     </nav>
 
-    <div class="px-4 pb-5 pt-4 border-t border-gray-100">
-      <div class="flex items-center gap-3 px-1">
-        <div class="h-8 w-8 rounded-full bg-gray-900 flex items-center justify-center text-white text-[10px] font-semibold tracking-wide">
-          {{ user.initials }}
+    <div class="px-3 pb-4 pt-3 border-t border-gray-100">
+      <div ref="profileRef" class="relative">
+        <div
+          :class="[
+            'flex items-center gap-3 rounded-md p-1.5 transition-colors',
+            menuOpen ? 'bg-gray-50' : 'hover:bg-gray-50/70',
+          ]"
+        >
+          <button
+            class="flex items-center gap-3 flex-1 min-w-0 text-left focus:outline-none"
+            :data-open="menuOpen"
+            aria-label="Account menu"
+            @click.stop="menuOpen = !menuOpen"
+          >
+            <div class="h-8 w-8 rounded-full bg-gray-900 flex items-center justify-center text-white text-[10px] font-semibold tracking-wide flex-shrink-0">
+              {{ user.initials }}
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[12px] font-medium text-gray-900 truncate leading-tight">{{ user.name }}</p>
+              <p class="text-[10px] text-gray-400 truncate mt-0.5">{{ user.email }}</p>
+            </div>
+          </button>
+
+          <button
+            :class="[
+              'h-7 w-7 flex items-center justify-center rounded-md transition-colors',
+              menuOpen ? 'bg-white text-gray-700 shadow-[0_1px_2px_rgba(0,0,0,0.04)]' : 'text-gray-400 hover:bg-white hover:text-gray-700',
+            ]"
+            :data-open="menuOpen"
+            aria-label="Settings"
+            @click.stop="menuOpen = !menuOpen"
+          >
+            <Settings class="h-3.5 w-3.5" :stroke-width="1.75" />
+          </button>
         </div>
-        <div class="flex-1 min-w-0">
-          <p class="text-[12px] font-medium text-gray-900 truncate leading-tight">{{ user.name }}</p>
-          <p class="text-[10px] text-gray-400 truncate mt-0.5">{{ user.email }}</p>
-        </div>
-        <button class="h-7 w-7 flex items-center justify-center rounded-md hover:bg-gray-50 text-gray-400 transition-colors">
-          <Settings class="h-3.5 w-3.5" :stroke-width="1.75" />
-        </button>
+
+        <Popover
+          :open="menuOpen"
+          :width="240"
+          placement="top-left"
+          teleport
+          :anchor="profileRef"
+        >
+          <UserMenu @select="menuOpen = false" />
+        </Popover>
       </div>
     </div>
   </aside>
@@ -52,12 +85,17 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
 import { Settings } from 'lucide-vue-next'
 import { useRoute } from 'vue-router'
 
 const { navigation, user } = useDashboardData()
 const route = useRoute()
 const isActive = (to: string) => (to === '/' ? route.path === '/' : route.path.startsWith(to))
+
+const menuOpen = ref(false)
+const profileRef = ref<HTMLElement | null>(null)
+useClickOutside(profileRef, () => (menuOpen.value = false))
 </script>
 
 <style scoped>
