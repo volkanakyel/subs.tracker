@@ -1,0 +1,34 @@
+@import 'tailwindcss';
+
+html,
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: #f8f9fb;
+  color: #1a1a1a;
+  scroll-behavior: smooth;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Nuxt Charts — minimal monochrome palette */
+:root {
+  --vis-color0: #1a1a1a;
+  --vis-color1: #4a4a4a;
+  --vis-color2: #7a7a7a;
+  --vis-color3: #a8a8a8;
+  --vis-color4: #c8c8c8;
+  --vis-color5: #e0e0e0;
+  --vis-axis-grid-color: rgba(0, 0, 0, 0.04);
+  --vis-tooltip-background-color: #ffffff;
+  --vis-tooltip-border-color: rgba(0, 0, 0, 0.08);
+  --vis-tooltip-text-color: #1a1a1a;
+  --vis-axis-tick-label-color: #9ca3af;
+  --vis-legend-label-color: #6b7280;
+  --vis-axis-label-color: #9ca3af;
+}
