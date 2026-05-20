@@ -1,0 +1,24 @@
+{
+  "name": "dashboard-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@vueuse/motion": "^2.2.6",
+    "lucide-vue-next": "^0.469.0",
+    "nuxt": "^3.21.4",
+    "nuxt-charts": "^2.1.1",
+    "vue": "latest",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.16",
+    "tailwindcss": "^4.1.16"
+  }
+}
