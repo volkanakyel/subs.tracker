@@ -1,12 +1,12 @@
 <template>
   <div
-    class="group relative h-full rounded-lg bg-white border border-gray-100/80 p-5 flex flex-col transition-colors hover:border-gray-200/80"
+    class="group relative h-full rounded-md bg-white border border-gray-100/80 p-5 flex flex-col transition-colors hover:border-gray-200/80"
   >
     <header class="flex items-start justify-between gap-2">
       <div class="flex items-center gap-3 min-w-0">
         <div
-          class="h-9 w-9 rounded-md flex items-center justify-center flex-shrink-0"
-          :class="account.isPrimary ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-700'"
+          class="h-9 w-9 rounded flex items-center justify-center flex-shrink-0"
+          :class="account.isPrimary ? 'bg-indigo-600 text-white shadow-[0_1px_3px_rgba(79,70,229,0.3)]' : 'bg-gray-50 text-gray-700'"
         >
           <component :is="icon" class="h-4 w-4" :stroke-width="1.75" />
         </div>
@@ -18,7 +18,7 @@
 
       <div ref="menuRef" class="relative">
         <button
-          class="h-7 w-7 flex items-center justify-center rounded-md text-gray-300 hover:text-gray-700 hover:bg-gray-50 opacity-0 group-hover:opacity-100 focus:opacity-100 data-[open=true]:opacity-100 transition-all"
+          class="h-7 w-7 flex items-center justify-center rounded text-gray-300 hover:text-gray-700 hover:bg-gray-50 opacity-0 group-hover:opacity-100 focus:opacity-100 data-[open=true]:opacity-100 transition-all"
           :data-open="open"
           aria-label="More options"
           @click.stop="open = !open"
@@ -29,7 +29,7 @@
         <Transition name="menu">
           <div
             v-if="open"
-            class="absolute right-0 top-8 z-10 w-44 rounded-lg border border-gray-100 bg-white shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)] py-1 origin-top-right"
+            class="absolute right-0 top-8 z-10 w-44 rounded-md border border-gray-100 bg-white shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)] py-1 origin-top-right"
           >
             <button
               class="w-full flex items-center gap-2 px-3 py-1.5 text-[12px] text-gray-700 hover:bg-gray-50 transition-colors"
@@ -82,7 +82,7 @@
       </div>
       <span
         v-if="account.isPrimary"
-        class="text-[10px] font-semibold uppercase tracking-widest text-gray-500"
+        class="text-[10px] font-semibold uppercase tracking-widest text-indigo-600"
       >
         Primary
       </span>

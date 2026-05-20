@@ -15,7 +15,7 @@
         role="dialog"
         aria-modal="true"
       >
-        <div class="w-full max-w-[440px] rounded-xl bg-white border border-gray-100 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] pointer-events-auto">
+        <div class="w-full max-w-[440px] rounded-lg bg-white border border-gray-100 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] pointer-events-auto">
           <header class="flex items-center justify-between px-5 pt-5 pb-1">
             <div>
               <h2 class="text-[15px] font-semibold text-gray-900 tracking-tight">
@@ -26,7 +26,7 @@
               </p>
             </div>
             <button
-              class="h-7 w-7 flex items-center justify-center rounded-md text-gray-400 hover:bg-gray-50 hover:text-gray-700 transition-colors"
+              class="h-7 w-7 flex items-center justify-center rounded text-gray-400 hover:bg-gray-50 hover:text-gray-700 transition-colors"
               aria-label="Close"
               @click="$emit('update:open', false)"
             >
@@ -108,14 +108,14 @@
             <div class="flex items-center gap-2">
               <button
                 type="button"
-                class="h-8 px-3.5 rounded-md text-[12px] font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                class="h-8 px-3.5 rounded text-[12px] font-medium text-gray-600 hover:text-gray-900 transition-colors"
                 @click="$emit('update:open', false)"
               >
                 Cancel
               </button>
               <button
                 type="button"
-                class="h-8 px-3.5 rounded-md bg-gray-900 text-white text-[12px] font-medium hover:bg-gray-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                class="h-8 px-3.5 rounded bg-gray-900 text-white text-[12px] font-medium hover:bg-gray-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 :disabled="!isValid"
                 @click="submit"
               >
