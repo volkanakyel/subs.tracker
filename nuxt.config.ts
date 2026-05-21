@@ -15,7 +15,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      meta: [{ name: 'theme-color', content: '#f8f9fb' }],
+      meta: [{ name: 'theme-color', content: '#f6f5f2' }],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },

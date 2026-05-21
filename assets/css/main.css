@@ -1,12 +1,23 @@
 @import 'tailwindcss';
 
+:root {
+  /* Accent — electric iris */
+  --accent: #7C5DFA;
+  --accent-hover: #6648E8;
+  --accent-soft: #EFEBFE;
+  --accent-ring: rgba(124, 93, 250, 0.22);
+  --accent-glow: 0 8px 24px -8px rgba(124, 93, 250, 0.45);
+  --accent-gradient: linear-gradient(135deg, #8A6CFF 0%, #6648E8 100%);
+}
+
 html,
 body {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-  background: #f8f9fb;
-  color: #1a1a1a;
+  background: #f6f5f2;
+  color: #111111;
   scroll-behavior: smooth;
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
+  letter-spacing: -0.005em;
 }
 
 body {
@@ -14,20 +25,78 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Layered ambient: faint mesh + low-noise grain */
+  background-image:
+    radial-gradient(800px circle at 0% 0%, rgba(124, 93, 250, 0.06), transparent 50%),
+    radial-gradient(900px circle at 100% 12%, rgba(124, 93, 250, 0.04), transparent 55%),
+    radial-gradient(1200px circle at 50% 100%, rgba(168, 142, 255, 0.05), transparent 60%);
+  background-attachment: fixed;
 }
 
-/* Nuxt Charts — minimal monochrome palette */
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.tabular-nums { font-variant-numeric: tabular-nums; }
+
+/* Reusable utilities */
+.accent-gradient { background: var(--accent-gradient); }
+
+.glass {
+  background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,255,255,0.74));
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.7) inset,
+    0 12px 32px -16px rgba(17, 17, 17, 0.10);
+}
+
+.metallic-accent {
+  background: linear-gradient(135deg, #9985FF 0%, #7C5DFA 45%, #6648E8 100%);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.30),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.12),
+    0 6px 20px -6px rgba(124, 93, 250, 0.55);
+}
+
+.card-shine {
+  position: relative;
+}
+.card-shine::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.5), transparent 24%);
+  mix-blend-mode: overlay;
+  opacity: 0.6;
+}
+.card-shine::after {
+  content: '';
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  top: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(124, 93, 250, 0.35), transparent);
+}
+
+/* Nuxt Charts — neutral base + iris accent */
 :root {
-  --vis-color0: #1a1a1a;
-  --vis-color1: #4a4a4a;
-  --vis-color2: #7a7a7a;
-  --vis-color3: #a8a8a8;
-  --vis-color4: #c8c8c8;
-  --vis-color5: #e0e0e0;
+  --vis-color0: #111111;
+  --vis-color1: #7C5DFA;
+  --vis-color2: #4a4a4a;
+  --vis-color3: #9985FF;
+  --vis-color4: #a8a8a8;
+  --vis-color5: #d4d4d4;
   --vis-axis-grid-color: rgba(0, 0, 0, 0.04);
   --vis-tooltip-background-color: #ffffff;
   --vis-tooltip-border-color: rgba(0, 0, 0, 0.08);
-  --vis-tooltip-text-color: #1a1a1a;
+  --vis-tooltip-text-color: #111111;
   --vis-axis-tick-label-color: #9ca3af;
   --vis-legend-label-color: #6b7280;
   --vis-axis-label-color: #9ca3af;
