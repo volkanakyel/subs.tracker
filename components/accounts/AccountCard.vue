@@ -1,12 +1,12 @@
 <template>
   <div
-    class="group relative h-full rounded-md bg-white border border-gray-100/80 p-5 flex flex-col transition-colors hover:border-gray-200/80"
+    class="card-shine group relative h-full rounded-md bg-white border border-gray-100/70 p-6 flex flex-col transition-colors hover:border-gray-200/80 overflow-hidden"
   >
     <header class="flex items-start justify-between gap-2">
       <div class="flex items-center gap-3 min-w-0">
         <div
           class="h-9 w-9 rounded flex items-center justify-center flex-shrink-0"
-          :class="account.isPrimary ? 'bg-indigo-600 text-white shadow-[0_1px_3px_rgba(79,70,229,0.3)]' : 'bg-gray-50 text-gray-700'"
+          :class="account.isPrimary ? 'metallic-accent text-white' : 'bg-gray-50 text-gray-700'"
         >
           <component :is="icon" class="h-4 w-4" :stroke-width="1.75" />
         </div>
@@ -82,7 +82,7 @@
       </div>
       <span
         v-if="account.isPrimary"
-        class="text-[10px] font-semibold uppercase tracking-widest text-indigo-600"
+        class="text-[10px] font-semibold uppercase tracking-widest text-[#7C5DFA]"
       >
         Primary
       </span>
