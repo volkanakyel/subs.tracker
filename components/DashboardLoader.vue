@@ -2,7 +2,7 @@
   <Transition name="loader-fade">
     <div
       v-if="visible"
-      class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#f6f5f2]"
+      class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white"
     >
       <div class="relative">
         <svg width="88" height="88" viewBox="0 0 88 88" class="block">

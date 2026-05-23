@@ -12,7 +12,7 @@
         </div>
         <div class="min-w-0">
           <p class="text-[13px] text-gray-900 font-medium truncate leading-tight">{{ account.name }}</p>
-          <p class="text-[11px] text-gray-400 mt-0.5 truncate">{{ account.institution }}</p>
+          <p class="text-[11px] text-gray-500 mt-0.5 truncate">{{ account.institution }}</p>
         </div>
       </div>
 
@@ -68,12 +68,12 @@
       </p>
     </div>
 
-    <p class="text-[11px] text-gray-400 mt-2">
+    <p class="text-[11px] text-gray-500 mt-2">
       {{ isLiability ? 'Current balance' : 'Available' }}
     </p>
 
     <footer class="flex items-center justify-between mt-auto pt-5">
-      <div class="flex items-center gap-1.5 text-[11px] text-gray-400 tabular-nums">
+      <div class="flex items-center gap-1.5 text-[11px] text-gray-500 tabular-nums">
         <span class="h-1 w-1 rounded-full bg-gray-300" />
         <span class="h-1 w-1 rounded-full bg-gray-300" />
         <span class="h-1 w-1 rounded-full bg-gray-300" />
@@ -82,13 +82,13 @@
       </div>
       <span
         v-if="account.isPrimary"
-        class="text-[10px] font-semibold uppercase tracking-widest text-[#7C5DFA]"
+        class="text-[10px] label-mono text-[#6E727A]"
       >
         Primary
       </span>
       <span
         v-else
-        class="text-[10px] font-medium uppercase tracking-wider text-gray-300"
+        class="text-[10px] label-mono text-gray-300"
       >
         {{ typeLabel }}
       </span>
