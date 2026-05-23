@@ -27,7 +27,7 @@
         </div>
         <div class="flex items-center gap-3">
           <span class="text-[13px] font-medium text-gray-900 tabular-nums">${{ h.value.toLocaleString() }}</span>
-          <span class="text-[11px] text-gray-400 tabular-nums w-8 text-right">{{ h.percentage }}%</span>
+          <span class="text-[11px] text-gray-500 tabular-nums w-8 text-right">{{ h.percentage }}%</span>
         </div>
       </div>
     </div>
