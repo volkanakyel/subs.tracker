@@ -5,7 +5,7 @@
       class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white"
     >
       <div class="relative">
-        <svg width="88" height="88" viewBox="0 0 88 88" class="block">
+        <svg width="72" height="72" viewBox="0 0 88 88" class="block">
           <g transform="translate(44, 44)">
             <line
               v-for="(seg, i) in segments"
@@ -15,14 +15,14 @@
               :x2="seg.x2"
               :y2="seg.y2"
               :stroke="seg.active ? '#1a1a1a' : '#e6e6e6'"
-              stroke-width="2"
+              stroke-width="1.75"
               stroke-linecap="round"
               class="transition-[stroke] duration-100"
             />
           </g>
         </svg>
         <div class="absolute inset-0 flex items-center justify-center">
-          <span class="loader-percent text-[13px] font-semibold text-gray-900 tabular-nums tracking-tight">
+          <span class="loader-percent text-[11px] font-semibold text-gray-900 tabular-nums tracking-tight">
             {{ progress }}
           </span>
         </div>
