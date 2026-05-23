@@ -1,44 +1,58 @@
 <template>
-  <header class="sticky top-0 z-20 bg-[#f8f9fb]/85 backdrop-blur-xl border-b border-gray-100/60">
-    <div class="flex items-center justify-between gap-4 px-5 sm:px-7 lg:px-10 py-4">
-      <div class="min-w-0">
-        <div class="flex items-center gap-2">
-          <h1 class="text-[15px] font-semibold text-gray-900 tracking-tight truncate">
-            {{ title ?? defaultTitle }}
-          </h1>
-          <span v-if="!title" class="hidden sm:inline-flex text-[11px] text-gray-400 font-medium tabular-nums">
-            · {{ formattedDate }}
+  <header class="relative z-10 px-6 sm:px-8 lg:px-10 pt-8 lg:pt-12 pb-10 border-b border-black/[0.07]">
+    <div class="flex items-start justify-between gap-6">
+      <div class="min-w-0 flex-1">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="label-mono text-[10px] text-gray-500">
+            <span v-if="title">Workspace · {{ title }}</span>
+            <span v-else>{{ formattedDate }}</span>
           </span>
+          <span class="numbered-index text-[10px]">#01</span>
         </div>
-        <p class="text-[11px] text-gray-400 mt-0.5">{{ subtitle ?? "Here's your financial overview" }}</p>
+        <h1 class="display-headline text-[32px] sm:text-[40px] lg:text-[44px] text-gray-900 truncate">
+          {{ title ?? defaultTitle }}
+        </h1>
+        <p class="text-[13px] text-gray-600 mt-2.5 max-w-[640px]">{{ subtitle ?? "Here's your financial overview" }}</p>
       </div>
 
-      <div class="flex items-center gap-1.5 flex-shrink-0">
+      <div class="flex items-center gap-2 flex-shrink-0 pt-1">
+        <!-- Live status pill -->
+        <span class="hidden lg:inline-flex items-center gap-2 h-9 px-3 rounded-md border border-gray-200 bg-[#f6f5f1] text-[11px] text-gray-700 font-medium">
+          <span class="relative h-1.5 w-1.5 rounded-full bg-emerald-500 text-emerald-500 pulse-dot" />
+          Live
+          <span class="text-gray-300">·</span>
+          <span class="label-mono text-[9px] text-gray-500">Synced 2m</span>
+        </span>
+
         <div class="relative hidden md:block">
-          <Search class="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-gray-400" :stroke-width="2" />
+          <Search class="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-500" :stroke-width="2" />
           <input
-            class="w-44 lg:w-52 rounded-md border border-gray-200/70 bg-white py-1.5 pl-7 pr-3 text-[12px] text-gray-700 placeholder-gray-400 focus:border-gray-300 focus:ring-2 focus:ring-gray-100 focus:outline-none transition-all"
+            class="w-48 lg:w-56 h-9 rounded-md border border-gray-200 bg-[#f6f5f1] pl-8.5 pr-10 text-[12.5px] text-gray-800 placeholder-gray-500 focus:bg-white focus:border-[#6E727A]/60 focus:ring-2 focus:ring-[#6E727A]/15 focus:outline-none transition-all"
             placeholder="Search…"
+            style="padding-left: 2.125rem"
           />
+          <kbd class="absolute right-2.5 top-1/2 -translate-y-1/2 hidden lg:inline-flex items-center h-[19px] px-1.5 rounded-sm border border-gray-200 bg-white text-[9px] font-semibold tabular-nums text-gray-500">⌘K</kbd>
         </div>
 
-        <button class="md:hidden h-8 w-8 flex items-center justify-center rounded-md bg-white border border-gray-100 hover:border-gray-200 transition-colors">
-          <Search class="h-3.5 w-3.5 text-gray-500" :stroke-width="2" />
+        <button class="md:hidden h-9 w-9 flex items-center justify-center rounded-md bg-[#f6f5f1] border border-gray-200 hover:border-gray-300 transition-colors">
+          <Search class="h-3.5 w-3.5 text-gray-700" :stroke-width="2" />
         </button>
 
         <!-- Notifications -->
         <div ref="notifRef" class="relative">
           <button
-            class="relative h-8 w-8 flex items-center justify-center rounded-md bg-white border border-gray-100 hover:border-gray-200 transition-colors data-[open=true]:border-gray-300"
+            class="relative h-9 w-9 flex items-center justify-center rounded-md bg-[#f6f5f1] border border-gray-200 hover:border-gray-300 transition-colors data-[open=true]:border-gray-400 data-[open=true]:bg-white"
             :data-open="openPanel === 'notifications'"
             aria-label="Notifications"
             @click.stop="toggle('notifications')"
           >
-            <Bell class="h-3.5 w-3.5 text-gray-600" :stroke-width="2" />
+            <Bell class="h-3.5 w-3.5 text-gray-700" :stroke-width="2" />
             <span
               v-if="unreadCount"
-              class="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-gray-900 ring-2 ring-white"
-            />
+              class="absolute -top-1 -right-1 inline-flex items-center justify-center h-[15px] min-w-[15px] px-1 rounded-full metallic-accent text-white text-[9px] font-semibold tabular-nums ring-2 ring-white"
+            >
+              {{ unreadCount }}
+            </span>
           </button>
 
           <Popover :open="openPanel === 'notifications'" :width="360">
@@ -49,7 +63,7 @@
         <!-- User -->
         <div ref="userRef" class="relative">
           <button
-            class="h-8 w-8 rounded-full bg-gray-900 flex items-center justify-center text-white text-[10px] font-semibold tracking-wide ring-offset-2 transition-all data-[open=true]:ring-2 data-[open=true]:ring-gray-200"
+            class="h-9 w-9 rounded-full metallic-accent flex items-center justify-center text-white text-[10.5px] font-semibold tracking-wide ring-offset-2 ring-offset-white transition-all data-[open=true]:ring-2 data-[open=true]:ring-gray-300"
             :data-open="openPanel === 'user'"
             aria-label="Account menu"
             @click.stop="toggle('user')"
