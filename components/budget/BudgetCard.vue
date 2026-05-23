@@ -1,17 +1,17 @@
 <template>
   <div
-    class="group relative h-full rounded-lg bg-white border border-gray-100/80 p-5 flex flex-col transition-colors hover:border-gray-200/80"
+    class="card-shine group relative h-full rounded-md bg-white border border-gray-100/70 p-6 flex flex-col transition-colors hover:border-gray-200/80 overflow-hidden"
   >
     <header class="flex items-start justify-between gap-2">
       <div class="flex items-center gap-3 min-w-0">
         <div
-          class="h-9 w-9 rounded-md bg-gray-50 flex items-center justify-center flex-shrink-0"
+          class="h-9 w-9 rounded bg-gray-50 flex items-center justify-center flex-shrink-0"
         >
           <component :is="icon" class="h-4 w-4 text-gray-700" :stroke-width="1.75" />
         </div>
         <div class="min-w-0">
           <p class="text-[13px] text-gray-900 font-medium truncate leading-tight">{{ budget.name }}</p>
-          <p class="text-[11px] text-gray-400 mt-0.5 truncate">
+          <p class="text-[11px] text-gray-500 mt-0.5 truncate">
             ${{ budget.spent.toLocaleString() }} of ${{ budget.limit.toLocaleString() }}
           </p>
         </div>
@@ -19,7 +19,7 @@
 
       <div ref="menuRef" class="relative">
         <button
-          class="h-7 w-7 flex items-center justify-center rounded-md text-gray-300 hover:text-gray-700 hover:bg-gray-50 opacity-0 group-hover:opacity-100 focus:opacity-100 data-[open=true]:opacity-100 transition-all"
+          class="h-7 w-7 flex items-center justify-center rounded text-gray-300 hover:text-gray-700 hover:bg-gray-50 opacity-0 group-hover:opacity-100 focus:opacity-100 data-[open=true]:opacity-100 transition-all"
           :data-open="open"
           aria-label="More options"
           @click.stop="open = !open"
@@ -31,7 +31,7 @@
           <div
             v-if="open"
             data-popover
-            class="absolute right-0 top-8 z-10 w-40 rounded-lg border border-gray-100 bg-white shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)] py-1 origin-top-right"
+            class="absolute right-0 top-8 z-10 w-40 rounded-md border border-gray-100 bg-white shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)] py-1 origin-top-right"
           >
             <button
               class="w-full flex items-center gap-2 px-3 py-1.5 text-[12px] text-gray-700 hover:bg-gray-50 transition-colors"
@@ -61,13 +61,13 @@
         ${{ Math.abs(remaining).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) }}
       </p>
       <span
-        class="text-[10.5px] font-semibold uppercase tracking-widest"
+        class="text-[10.5px] label-mono"
         :class="statusColor"
       >
         {{ statusLabel }}
       </span>
     </div>
-    <p class="text-[11px] text-gray-400 mt-2">
+    <p class="text-[11px] text-gray-500 mt-2">
       {{ remaining >= 0 ? 'left to spend' : 'over budget' }}
     </p>
 
@@ -82,7 +82,7 @@
           class="absolute right-0 top-0 h-full w-1 bg-red-600 animate-pulse"
         />
       </div>
-      <div class="flex items-center justify-between mt-2 text-[10px] text-gray-400 tabular-nums">
+      <div class="flex items-center justify-between mt-2 text-[10px] text-gray-500 tabular-nums">
         <span>{{ pct.toFixed(0) }}%</span>
         <span>${{ budget.limit.toLocaleString() }}</span>
       </div>

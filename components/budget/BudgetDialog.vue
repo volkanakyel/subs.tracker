@@ -15,18 +15,18 @@
         role="dialog"
         aria-modal="true"
       >
-        <div class="w-full max-w-[460px] rounded-xl bg-white border border-gray-100 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] pointer-events-auto">
+        <div class="w-full max-w-[460px] rounded-lg bg-white border border-gray-100 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] pointer-events-auto">
           <header class="flex items-center justify-between px-5 pt-5 pb-1">
             <div>
               <h2 class="text-[15px] font-semibold text-gray-900 tracking-tight">
                 {{ isEdit ? 'Edit budget' : 'New budget' }}
               </h2>
-              <p class="text-[11px] text-gray-400 mt-0.5">
+              <p class="text-[11px] text-gray-500 mt-0.5">
                 {{ isEdit ? 'Adjust the limit or spent so far.' : 'Set a monthly limit for a category.' }}
               </p>
             </div>
             <button
-              class="h-7 w-7 flex items-center justify-center rounded-md text-gray-400 hover:bg-gray-50 hover:text-gray-700 transition-colors"
+              class="h-7 w-7 flex items-center justify-center rounded text-gray-400 hover:bg-gray-50 hover:text-gray-700 transition-colors"
               aria-label="Close"
               @click="$emit('update:open', false)"
             >
@@ -52,9 +52,9 @@
                   :key="opt.key"
                   type="button"
                   :class="[
-                    'h-9 w-full flex items-center justify-center rounded-md border transition-all',
+                    'h-9 w-full flex items-center justify-center rounded border transition-all',
                     form.iconKey === opt.key
-                      ? 'bg-gray-900 text-white border-gray-900'
+                      ? 'btn-metallic border-transparent'
                       : 'bg-white text-gray-600 border-gray-200/70 hover:border-gray-300',
                   ]"
                   :aria-label="opt.label"
@@ -68,7 +68,7 @@
             <div class="grid grid-cols-2 gap-3">
               <Field label="Monthly limit">
                 <div class="relative">
-                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-400">$</span>
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-500">$</span>
                   <input
                     v-model.number="form.limit"
                     type="number"
@@ -82,7 +82,7 @@
               </Field>
               <Field label="Spent so far">
                 <div class="relative">
-                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-400">$</span>
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-500">$</span>
                   <input
                     v-model.number="form.spent"
                     type="number"
@@ -96,9 +96,9 @@
             </div>
 
             <!-- Live preview -->
-            <div class="rounded-md bg-gray-50/70 border border-gray-100 p-3">
+            <div class="rounded bg-gray-50/70 border border-gray-100 p-3">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Preview</span>
+                <span class="text-[10px] label-mono text-gray-400">Preview</span>
                 <span class="text-[11px] tabular-nums font-medium" :class="previewStatusColor">
                   {{ previewPct.toFixed(0) }}% · {{ previewStatusLabel }}
                 </span>
@@ -135,14 +135,14 @@
             <div class="flex items-center gap-2">
               <button
                 type="button"
-                class="h-8 px-3.5 rounded-md text-[12px] font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                class="h-8 px-3.5 rounded text-[12px] font-medium text-gray-600 hover:text-gray-900 transition-colors"
                 @click="$emit('update:open', false)"
               >
                 Cancel
               </button>
               <button
                 type="button"
-                class="h-8 px-3.5 rounded-md bg-gray-900 text-white text-[12px] font-medium hover:bg-gray-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                class="h-8 px-3.5 rounded btn-metallic text-[12px] font-medium disabled:opacity-40 disabled:cursor-not-allowed"
                 :disabled="!isValid"
                 @click="submit"
               >
@@ -250,8 +250,8 @@ const submit = () => {
   color: #9ca3af;
 }
 .form-input:focus {
-  border-color: #d1d5db;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
+  border-color: #D8DBDF;
+  box-shadow: 0 0 0 3px rgba(110, 114, 122, 0.18);
 }
 
 .backdrop-enter-active,
