@@ -21,7 +21,7 @@
               <h2 class="text-[15px] font-semibold text-gray-900 tracking-tight">
                 {{ isEdit ? 'Edit account' : 'New account' }}
               </h2>
-              <p class="text-[11px] text-gray-400 mt-0.5">
+              <p class="text-[11px] text-gray-500 mt-0.5">
                 {{ isEdit ? 'Update the details below.' : 'Link a new account to track its balance.' }}
               </p>
             </div>
@@ -76,7 +76,7 @@
 
             <Field label="Balance" :hint="form.type === 'credit' ? 'Use a negative value for amount owed.' : undefined">
               <div class="relative">
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-400">$</span>
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-500">$</span>
                 <input
                   v-model.number="form.balance"
                   type="number"
@@ -115,7 +115,7 @@
               </button>
               <button
                 type="button"
-                class="h-8 px-3.5 rounded bg-gray-900 text-white text-[12px] font-medium hover:bg-gray-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                class="h-8 px-3.5 rounded btn-metallic text-[12px] font-medium disabled:opacity-40 disabled:cursor-not-allowed"
                 :disabled="!isValid"
                 @click="submit"
               >
@@ -213,8 +213,8 @@ const submit = () => {
   color: #9ca3af;
 }
 .form-input:focus {
-  border-color: #d1d5db;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
+  border-color: #D8DBDF;
+  box-shadow: 0 0 0 3px rgba(110, 114, 122, 0.18);
 }
 .form-check {
   width: 14px;
