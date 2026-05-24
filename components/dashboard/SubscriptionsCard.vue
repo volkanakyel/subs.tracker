@@ -3,7 +3,7 @@
     <template #header>
       <div class="text-right">
         <p class="text-[15px] font-semibold text-gray-900 tabular-nums leading-none">${{ totalMonthly.toFixed(2) }}</p>
-        <p class="text-[10px] text-gray-400 mt-1">per month</p>
+        <p class="text-[10px] text-gray-500 mt-1">per month</p>
       </div>
     </template>
 
@@ -14,12 +14,12 @@
         class="flex items-center justify-between py-2"
       >
         <div class="flex items-center gap-3">
-          <div class="h-8 w-8 rounded-md bg-gray-50 flex items-center justify-center overflow-hidden">
+          <div class="h-8 w-8 rounded bg-gray-50 flex items-center justify-center overflow-hidden">
             <img :src="sub.icon" :alt="sub.name" class="h-4 w-4 object-contain" />
           </div>
           <div>
             <p class="text-[13px] text-gray-800 font-medium leading-tight">{{ sub.name }}</p>
-            <p class="text-[10px] text-gray-400 mt-0.5">{{ renewalLabel(sub.nextRenewal) }}</p>
+            <p class="text-[10px] text-gray-500 mt-0.5">{{ renewalLabel(sub.nextRenewal) }}</p>
           </div>
         </div>
         <span class="text-[13px] font-medium text-gray-900 tabular-nums">${{ sub.price.toFixed(2) }}</span>
