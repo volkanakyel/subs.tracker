@@ -1,14 +1,14 @@
 <template>
-  <div class="min-h-screen bg-[#f8f9fb] antialiased font-sans">
+  <div class="min-h-screen bg-white antialiased font-sans">
     <DashboardSidebar />
 
-    <div class="lg:ml-[240px] min-h-screen pb-24 lg:pb-0">
+    <div class="lg:ml-[260px] min-h-screen pb-24 lg:pb-0">
       <DashboardTopbar
         title="Accounts"
         subtitle="All your balances in one place"
       />
 
-      <main class="max-w-[1240px] mx-auto px-5 sm:px-7 lg:px-10 py-6 lg:py-8 space-y-5">
+      <main class="page-modal mx-3 lg:mx-0 mb-6 px-6 sm:px-8 lg:px-10 py-8 lg:py-10 space-y-7">
         <!-- Summary -->
         <MotionItem :delay="0.04">
           <BaseCard :padded="false">
@@ -44,7 +44,7 @@
               <Search class="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-400" :stroke-width="2" />
               <input
                 v-model="query"
-                class="w-full rounded-md border border-gray-200/70 bg-white py-2 pl-9 pr-3 text-[12.5px] text-gray-700 placeholder-gray-400 focus:border-gray-300 focus:ring-2 focus:ring-gray-100 focus:outline-none transition-all"
+                class="w-full rounded border border-gray-200/70 bg-white py-2 pl-9 pr-3 text-[12.5px] text-gray-700 placeholder-gray-400 focus:border-[#6E727A]/50 focus:ring-2 focus:ring-[#6E727A]/15 focus:outline-none transition-all"
                 placeholder="Search accounts…"
               />
             </div>
@@ -52,7 +52,7 @@
             <div class="flex items-center gap-2 sm:ml-auto">
               <SegmentedControl v-model="filter" :options="filterOptions" />
               <button
-                class="inline-flex items-center gap-1.5 h-8 px-3 rounded-md bg-gray-900 text-white text-[11.5px] font-medium hover:bg-gray-800 transition-colors"
+                class="inline-flex items-center gap-1.5 h-8 px-3 rounded btn-metallic text-[11.5px] font-medium"
                 @click="openCreate"
               >
                 <Plus class="h-3.5 w-3.5" :stroke-width="2.25" />
@@ -81,10 +81,10 @@
 
           <div
             v-if="!filtered.length"
-            class="rounded-lg bg-white border border-gray-100/80 px-4 py-16 text-center"
+            class="rounded-md bg-white border border-gray-100/80 px-4 py-16 text-center"
           >
             <p class="text-[13px] text-gray-500 font-medium">No accounts match</p>
-            <p class="text-[11px] text-gray-400 mt-1">Try a different search, filter, or add one.</p>
+            <p class="text-[11px] text-gray-500 mt-1">Try a different search, filter, or add one.</p>
           </div>
         </MotionItem>
       </main>
@@ -112,20 +112,20 @@
           v-if="pendingDelete"
           class="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
         >
-          <div class="w-full max-w-[380px] rounded-xl bg-white border border-gray-100 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] pointer-events-auto p-5">
+          <div class="w-full max-w-[380px] rounded-lg bg-white border border-gray-100 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] pointer-events-auto p-5">
             <h3 class="text-[14px] font-semibold text-gray-900 tracking-tight">Delete account?</h3>
             <p class="text-[12px] text-gray-500 mt-1.5">
               <span class="font-medium text-gray-700">{{ pendingDelete.name }}</span> will be removed. This won't affect the actual account at your bank.
             </p>
             <div class="flex items-center justify-end gap-2 mt-5">
               <button
-                class="h-8 px-3.5 rounded-md text-[12px] font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                class="h-8 px-3.5 rounded text-[12px] font-medium text-gray-600 hover:text-gray-900 transition-colors"
                 @click="pendingDelete = null"
               >
                 Cancel
               </button>
               <button
-                class="h-8 px-3.5 rounded-md bg-red-600 text-white text-[12px] font-medium hover:bg-red-700 transition-colors"
+                class="h-8 px-3.5 rounded bg-gradient-to-br from-red-500 to-red-700 text-white text-[12px] font-medium hover:from-red-400 hover:to-red-600 shadow-[0_4px_12px_-4px_rgba(220,38,38,0.45),inset_0_1px_0_0_rgba(255,255,255,0.18)] transition-all"
                 @click="onDelete"
               >
                 Delete
