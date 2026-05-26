@@ -1,14 +1,14 @@
 <template>
   <div
-    class="group grid grid-cols-[1fr_110px_120px_140px_100px_32px] items-center gap-4 px-4 py-3 rounded-lg hover:bg-gray-50/70 transition-colors"
+    class="group grid grid-cols-[1fr_110px_120px_140px_100px_32px] items-center gap-4 px-4 py-3 rounded-md hover:bg-gray-50/70 transition-colors"
   >
     <div class="flex items-center gap-3 min-w-0">
-      <div class="h-9 w-9 rounded-md bg-gray-50 flex items-center justify-center overflow-hidden flex-shrink-0">
+      <div class="h-9 w-9 rounded bg-gray-50 flex items-center justify-center overflow-hidden flex-shrink-0">
         <img :src="sub.icon" :alt="sub.name" class="h-5 w-5 object-contain" />
       </div>
       <div class="min-w-0">
         <p class="text-[13px] text-gray-900 font-medium truncate leading-tight">{{ sub.name }}</p>
-        <p class="text-[11px] text-gray-400 mt-0.5">Since {{ sinceLabel }}</p>
+        <p class="text-[11px] text-gray-500 mt-0.5">Since {{ sinceLabel }}</p>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
 
     <div ref="menuRef" class="relative justify-self-end">
       <button
-        class="h-7 w-7 flex items-center justify-center rounded-md text-gray-300 hover:text-gray-700 hover:bg-gray-100 opacity-0 group-hover:opacity-100 focus:opacity-100 data-[open=true]:opacity-100 transition-all"
+        class="h-7 w-7 flex items-center justify-center rounded text-gray-300 hover:text-gray-700 hover:bg-gray-100 opacity-0 group-hover:opacity-100 focus:opacity-100 data-[open=true]:opacity-100 transition-all"
         :data-open="open"
         aria-label="More options"
         @click.stop="open = !open"
@@ -44,7 +44,7 @@
       <Transition name="menu">
         <div
           v-if="open"
-          class="absolute right-0 top-8 z-10 w-40 rounded-lg border border-gray-100 bg-white shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)] py-1 origin-top-right"
+          class="absolute right-0 top-8 z-10 w-40 rounded-md border border-gray-100 bg-white shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)] py-1 origin-top-right"
         >
           <button
             class="w-full flex items-center gap-2 px-3 py-1.5 text-[12px] text-gray-700 hover:bg-gray-50 transition-colors"
